@@ -1,0 +1,224 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+@theme {
+  --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  --font-sans: "IBM Plex Sans", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-display: "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+
+  --color-bg: #070b16;
+  --color-surface: #0d1424;
+  --color-surface-2: #121b2e;
+  --color-border: #212c42;
+  --color-text: #e8ecf5;
+  --color-text-dim: #7a86a3;
+  --color-blue: #4d8dff;
+  --color-red: #ef4462;
+  --color-green: #34d399;
+  --color-amber: #f5a623;
+}
+
+:root {
+  color-scheme: dark;
+  --bg: #070b16;
+  --surface: #0d1424;
+  --surface-2: #121b2e;
+  --border: #212c42;
+  --text: #e8ecf5;
+  --text-dim: #7a86a3;
+  --blue: #4d8dff;
+  --red: #ef4462;
+  --green: #34d399;
+  --amber: #f5a623;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  line-height: 1.5;
+}
+
+.titen-shell {
+  position: relative;
+  min-height: 100dvh;
+}
+
+.surface {
+  background: var(--surface);
+  border: 1px solid var(--border);
+}
+.surface-2 {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+}
+.hairline {
+  border-color: var(--border);
+}
+
+/* Signature moment: a blurred four-colour mesh anchored top-left of the
+   viewport. Exact stops from the finalised mockup. */
+.mesh {
+  position: fixed;
+  top: -20%;
+  left: -10%;
+  width: 900px;
+  height: 700px;
+  z-index: 0;
+  pointer-events: none;
+  filter: blur(60px);
+  background:
+    radial-gradient(circle at 20% 20%, rgba(77, 141, 255, 0.35), transparent 45%),
+    radial-gradient(circle at 75% 15%, rgba(168, 85, 247, 0.3), transparent 45%),
+    radial-gradient(circle at 55% 60%, rgba(236, 72, 153, 0.22), transparent 45%),
+    radial-gradient(circle at 90% 70%, rgba(34, 211, 238, 0.25), transparent 45%);
+}
+
+/* The same gradient, clipped to one accent word in the headline. */
+.gradient-text {
+  background-image: linear-gradient(100deg, #4d8dff, #a855f7 45%, #ec4899 75%, #22d3ee);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* The blinking terminal cursor after the wordmark. */
+.cursor {
+  display: inline-block;
+  width: 8px;
+  height: 16px;
+  border-radius: 1px;
+  background: var(--blue);
+  box-shadow: 0 0 8px var(--blue);
+  animation: titen-blink 1.25s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+@keyframes titen-blink {
+  0%, 45% { opacity: 1; }
+  70%, 100% { opacity: 0.12; }
+}
+
+/* Solid terminal CTA (dark ink on blue) + ghost link. */
+.cta {
+  background: var(--blue);
+  color: #070b16;
+  border: none;
+  border-radius: 6px;
+  font-family: var(--font-mono);
+  font-weight: 500;
+  transition: filter 0.2s, box-shadow 0.2s;
+}
+.cta:hover {
+  filter: brightness(1.08);
+  box-shadow: 0 10px 34px -14px var(--blue);
+}
+.cta-ghost {
+  font-family: var(--font-mono);
+  color: var(--text-dim);
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 2px;
+  transition: color 0.2s, border-color 0.2s;
+}
+.cta-ghost:hover {
+  color: var(--text);
+  border-color: var(--text-dim);
+}
+
+.glow-hover {
+  transition: border-color 0.25s, box-shadow 0.25s;
+}
+.glow-hover:hover {
+  border-color: color-mix(in oklab, var(--blue) 55%, var(--border));
+  box-shadow: 0 18px 50px -26px var(--blue);
+}
+
+:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 2px;
+}
+
+
+/* ------------------------------------------------------------------ *
+ * App-wide rollout: the module pages were built on Tailwind's slate /
+ * sky / rose / emerald / amber / violet / cyan ramps. Rather than edit
+ * every file, remap those ramps onto the Titen palette here. The app is
+ * dark-committed, so only the dark values need to be right.
+ * ------------------------------------------------------------------ */
+@theme {
+  --color-slate-50: #f4f7fd;
+  --color-slate-100: #e8ecf5;
+  --color-slate-200: #d4dbe9;
+  --color-slate-300: #aeb9ce;
+  --color-slate-400: #7a86a3;
+  --color-slate-500: #6b7794;
+  --color-slate-600: #55617a;
+  --color-slate-700: #2c3a56;
+  --color-slate-800: #212c42;
+  --color-slate-900: #121b2e;
+  --color-slate-950: #0d1424;
+
+  --color-sky-300: #8fb8ff;
+  --color-sky-400: #6ea6ff;
+  --color-sky-500: #4d8dff;
+  --color-sky-600: #4d8dff;
+  --color-sky-700: #3a6fd0;
+  --color-sky-800: #24406e;
+  --color-sky-950: #10203c;
+
+  --color-rose-300: #f6a5b4;
+  --color-rose-400: #f2647d;
+  --color-rose-500: #ef4462;
+  --color-rose-600: #e0334f;
+  --color-rose-700: #b93650;
+  --color-rose-800: #7d1f2f;
+  --color-rose-950: #2a1119;
+
+  --color-emerald-300: #86efc7;
+  --color-emerald-400: #52ddb0;
+  --color-emerald-500: #34d399;
+  --color-emerald-600: #22b184;
+  --color-emerald-700: #1c8f6c;
+  --color-emerald-800: #155140;
+  --color-emerald-950: #0c261f;
+
+  --color-amber-300: #f7c46b;
+  --color-amber-400: #f6b23f;
+  --color-amber-500: #f5a623;
+  --color-amber-600: #d98a12;
+  --color-amber-700: #a9690d;
+  --color-amber-800: #5c3c12;
+  --color-amber-900: #4a3216;
+  --color-amber-950: #2a1e0d;
+
+  --color-violet-100: #ede4fe;
+  --color-violet-300: #c9a3fb;
+  --color-violet-400: #b57cf9;
+  --color-violet-500: #a855f7;
+  --color-violet-600: #9333ea;
+  --color-violet-700: #6d28d9;
+  --color-violet-800: #4a1d80;
+  --color-violet-950: #1e1233;
+
+  --color-cyan-300: #7de8f5;
+  --color-cyan-400: #38d6ee;
+  --color-cyan-500: #22d3ee;
+  --color-cyan-900: #0c2b33;
+  --color-cyan-950: #082026;
+
+  --color-orange-100: #3a2411;
+  --color-orange-300: #f7a24f;
+  --color-orange-500: #f58423;
+  --color-orange-900: #3a2411;
+  --color-orange-950: #241608;
+}
+
+.btn-terminal {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  color: var(--text);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.btn-terminal:hover {
+  border-color: var(--blue);
+  box-shadow: 0 0 0 1px var(--blue), 0 12px 40px -18px var(--blue);
+}
